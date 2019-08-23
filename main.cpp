@@ -1,30 +1,31 @@
-#include <iostream>
+#include "TesteValidaNumero.h"
 #include <string>
+#include <iostream>
 
-#include "FiguraGeometrica.h"
-#include "Triangulo.h"
-#include "Quadrado.h"
-#include "Circulo.h"
+int main(void) {
+	TesteValidaNumero *tNum = new TesteValidaNumero();
 
-using namespace std;
+	try {
+		std::cout << "Numero 77: " << std::endl;
+		tNum->validaNumero(77);
+		std::cout << "Numero -15: " << std::endl;
+		tNum->validaNumero(-15);
+		std::cout << "Numero 275: " << std::endl;
+		tNum->validaNumero(275);
+		std::cout << "Numero 3333: " << std::endl;
+		tNum->validaNumero(3333);
+	}
+	catch (ValorAbaixoException ex) {
+		std::cerr << "Exception/Error :" << ex.what() << std::endl;
+	}
+	catch (ValorAcimaException ex) {
+		std::cerr << "Exception/Error : " << ex.what() << std::endl;
+	}
+	catch (ValorMuitoAcimaException ex) {
+		std::cerr << "Exception/Error : " << ex.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Exception/Error" << std::endl;
+	}
 
-int main()
-{
-    Triangulo *tri = new Triangulo(3.5, 5, "triangulo");
-    Quadrado *qua = new Quadrado(7.5, "quadrado");
-    Circulo *cir = new Circulo(9.8, "circulo");
-
-    cout << "Nome obj 1: " << tri->getNome() << endl;
-    cout << "Altura: " << tri->getAltura() << " / " << "Base: " << tri->getBase() << endl;
-    cout << "Area triangulo: " << tri->calcularArea(3.5, 5) << endl;
-
-    cout << "\nNome obj 2: " << qua->getNome() << endl;
-    cout << "Lado: " << qua->getLado() << endl;
-    cout << "Area quadrado: " << qua->calcularArea(7.5) << endl;
-
-    cout << "\nNome obj 3: " << cir->getNome() << endl;
-    cout << "Raio: " << cir->getRaio() << endl;
-    cout << "Area circulo: " << cir->calcularArea(9.8) << endl;
-
-    return 0;
 }
