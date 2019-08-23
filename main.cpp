@@ -1,31 +1,25 @@
-#include "TesteValidaNumero.h"
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <string>
 
-int main(void) {
-	TesteValidaNumero *tNum = new TesteValidaNumero();
+int main(){
+    std::string safe;
+    std::ofstream stWrite;
+    std::ifstream stRead;
 
-	try {
-		std::cout << "Numero 77: " << std::endl;
-		tNum->validaNumero(77);
-		std::cout << "Numero -15: " << std::endl;
-		tNum->validaNumero(-15);
-		std::cout << "Numero 275: " << std::endl;
-		tNum->validaNumero(275);
-		std::cout << "Numero 3333: " << std::endl;
-		tNum->validaNumero(3333);
-	}
-	catch (ValorAbaixoException ex) {
-		std::cerr << "Exception/Error :" << ex.what() << std::endl;
-	}
-	catch (ValorAcimaException ex) {
-		std::cerr << "Exception/Error : " << ex.what() << std::endl;
-	}
-	catch (ValorMuitoAcimaException ex) {
-		std::cerr << "Exception/Error : " << ex.what() << std::endl;
-	}
-	catch (...) {
-		std::cerr << "Exception/Error" << std::endl;
-	}
+    stWrite.open("file1.txt");
+    stWrite << "TEXTO DE TESTE\n";
+    stWrite.close();
+    stRead.open("file1.txt");
+    getline(stRead, safe);
+    std::cout << "file1: " << safe;
 
+    stWrite.open("file2.txt");
+    stWrite << safe;
+    stWrite.close();
+    stRead.open("file2.txt");
+    getline(stRead, safe);
+    std::cout << "\nfile2: " << safe;
+
+    return 0;
 }
